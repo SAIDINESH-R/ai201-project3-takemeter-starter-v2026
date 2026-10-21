@@ -39,10 +39,7 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
-
-
+TakeMeter sorts text from **r/personalfinance**, a public Reddit community where people describe their money situations and others reply with advice. Each post or top-level comment goes into one of three labels: `question` (someone asking for help with their own money), `reasoned_advice` (advice backed by a fact, number, real rule, or explanation of how something works), or `bare_advice` (advice with no real backing). The interesting line is the second one: plenty of advice on the sub is confident and specific but never says *why*, and this classifier tries to tell that apart from advice that does.
 
 ---
 
@@ -88,7 +85,7 @@
 
 **Which two labels:** `reasoned_advice` vs. `bare_advice`
 
-**The decision rule I used every time:** A comment is `reasoned_advice` only if it backs the advice with an actual justification — a fact, a number, a rule, or how something works. A "reason" that is just a common perception or an insult ("the advisor is a shark") is not proper backing, so the comment is `bare_advice`. The commenter's own personal situation ("my wife and I combined don't make that") is also not backing — it's their situation, not a fact — so it doesn't make a comment `reasoned_advice` either. A rule of thumb ("never co-sign a loan") is popular wisdom, not a real rule, so it doesn't count either. Length doesn't decide it: a short comment can be reasoned, and a long one can be bare.
+**The decision rule I used every time:** A comment is `reasoned_advice` only if it backs the advice with an actual justification — a fact, a number, a real rule (a law, tax rule, or policy), or how something works. A "reason" that is just a common perception or an insult ("the advisor is a shark") is not proper backing, so the comment is `bare_advice`. The commenter's own personal situation ("my wife and I combined don't make that") is also not backing — it's their situation, not a fact — so it doesn't make a comment `reasoned_advice` either. A rule of thumb ("never co-sign a loan") is popular wisdom, not a real rule, so it doesn't count either. Length doesn't decide it: a short comment can be reasoned, and a long one can be bare.
 
 ### What I left out
 
@@ -102,45 +99,47 @@ Replies that neither ask for help nor give advice — commenters doubting the po
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** r/personalfinance, through the public Arctic Shift Reddit archive (reddit.com itself blocked scripted requests). Original posts (title + body) from roughly September 2026, plus up to four of the highest-scored top-level comments from each thread. Deleted/removed text, AutoModerator, and anything under 80 characters were dropped. I read threads on the site myself first (Milestone 1, notes in `notes.md`).
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+**How I labelled them:**
+1. **20 cold**, by me alone with no AI, before seeing any pre-labels. Marked `cold`.
+2. **The other 262 were pre-labelled by Claude** using my definitions and decision rule, and Claude flagged 83 as hard (boundary cases).
+3. **I reviewed 32 of the 83 hard rows** one by one (kept every pre-label). Marked `pre-labelled by Claude, checked by me`.
+4. **The remaining 230 rows were not reviewed by me.** Marked `pre-labelled by Claude, not reviewed`. See the disclosure in How I Used AI.
+5. Replies that neither asked for help nor gave advice (doubting the poster, side questions, jokes) were dropped, as decided in my taxonomy — 26 from the pool plus one of my cold rows.
+6. 12 extra `question` posts were added afterwards to get `question` above 25% (criterion 4).
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `reasoned_advice` | 105 | 37.2% |
+| `bare_advice` | 100 | 35.5% |
+| `question` | 77 | 27.3% |
+| **Total** | 282 | 100% |
 
 **Three hard cases**
 
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
-
 **1.**
-> *The post:*
+> *The post:* "My wife and I have been married for more than 40 years and we've always combined all income, all debt, and all property. For anything involving money, we act as one. That approach has been great for us both personally and financially, and that's what I would recommend to most couples."
 >
-> *Could have been:*
+> *Could have been:* `reasoned_advice` or `bare_advice`
 >
-> *I chose, because:*
+> *I chose, because:* I labelled it `reasoned_advice` in my cold round. Reading it against my own rule afterwards, the only backing is the commenter's own marriage — personal experience, which my rule says is not backing — so the rule says `bare_advice`. I left the cold label as I made it; it's evidence that personal experience *feels* like a reason in the moment even after I'd written that it isn't one.
 
 **2.**
-> *The post:*
+> *The post:* "The data show that immediate deployment into the market always wins in the long term. Don't try to time the market."
 >
-> *Could have been:*
+> *Could have been:* `reasoned_advice` or `bare_advice`
 >
-> *I chose, because:*
+> *I chose, because:* `reasoned_advice` — "the data show" is a factual claim about how investing works. The case for `bare_advice` is that no data is actually given and "don't time the market" is a rule of thumb, which my rule excludes. I kept reasoned, but this is the weakest kind of "fact" my rule lets in.
 
 **3.**
-> *The post:*
+> *The post:* "Did your lease start on the 13th? Perhaps the term end is 12 months exactly from term start"
 >
-> *Could have been:*
+> *Could have been:* `question` or dropped (not advice, not a help request)
 >
-> *I chose, because:*
+> *I chose, because:* I labelled it `question` in my cold round because it is literally a question. But my `question` label is for someone asking about *their own* money, and I'd decided to drop clarifying replies to the poster — so by my own taxonomy it shouldn't be in the data at all. Kept as made, since it's a cold row.
 
 ---
 
@@ -148,16 +147,23 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, max length 128 tokens, seed 42.
 
-**Anything I changed from the defaults, and why:**
+**Device:** `mps` (Apple Silicon GPU), torch 2.14.1. Training took about 38 seconds.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+**Anything I changed from the defaults, and why:** Nothing. Only `LABELS` was set to my three labels.
 
+**Split sizes:** 196 train / 43 val / 43 test.
+
+| Label | Train | Val | Test |
+|---|---|---|---|
+| `question` | 53 | 12 | 12 |
+| `reasoned_advice` | 73 | 16 | 16 |
+| `bare_advice` | 70 | 15 | 15 |
+
+Every label has at least 12 in the test split, above the ~8 where per-label scores get jumpy — but 12–16 is still small, so expect per-label F1 to move between seeds next unit.
 
 
 ---
@@ -173,17 +179,17 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* A stress test of my labels — eight posts written to sit on my label boundaries, for me to sort with my own rule.
+- *What came back:* Eight short comments. I sorted seven cleanly. I couldn't decide "Never co-sign a loan. Ever." because my definition said "a rule" counted as backing, and that sounds like a money rule.
+- *What I changed:* I tightened `reasoned_advice` to say a *real* rule (a law, tax rule, or policy). Rules of thumb like "never co-sign" are popular wisdom and count as `bare_advice`.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help collecting posts, then pre-labelling everything except my 20 cold rows using my definitions and decision rule.
+- *What came back:* A collection script pulling 296 posts/comments from a public Reddit archive, and pre-labels for all of them with 83 flagged as hard boundary cases, each with a one-line reason. The pre-labels also showed `question` at 24% — just under my criterion 4.
+- *What I changed:* I had 12 more question posts collected to get `question` to 27%. I reviewed 32 of the hard rows one at a time and kept all 32 pre-labels.
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** 262 of 282 rows were pre-labelled by Claude. I reviewed 32 of them (all from the flagged-hard set) and agreed with every one. **The other 230 were not reviewed by me** — I stopped the review partway through and accepted the remaining pre-labels as they were. Every row's `note` column says which group it is in (`cold`, `checked by me`, or `not reviewed`). Only the 20 cold rows are labels I made independently. If the model struggles on the `reasoned_advice`/`bare_advice` boundary next unit, the unreviewed rows are one of the first places to look.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
