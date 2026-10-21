@@ -54,34 +54,45 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `question`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** A post where someone describes their own money situation and asks for help with it.
 
 **Example 1:**
->
+> Previous employer took 401k from paychecks, now found out there is no 401k account, what do I do? — Hello! My previous employer had taken deductions from my paychecks for a 401k. I worked there from 2023-2025, where I was under the impression there was a 401k account with fidelity that my retirement would be going to. Fast forward to my new employer offers a 401k plan and I contact fidelity to see if these can be connected/merged somehow. Lo and behold fidelity has nothing for me on file. […] What should I do?
 
 **Example 2:**
->
+> Does anyone in their 20's feel like they're behind everyone else?
+
+### `reasoned_advice`
+
+**Definition:** Advice backed by an actual justification — a fact, a number, a rule, or an explanation of how something works.
+
+**Example 1:**
+> Typically, ADP won't have anything to do with your 401k except processing the deduction. This is a question your old employer needs to answer. If it was a minimal balance, it's entirely possible they cashed you out and sent you a check. You can also check unclaimed funds. If a company is "advanced" enough to use ADP, it's highly unlikely they're pocketing your funds. Not saying it didn't happen, but there are other possibilites.
+
+**Example 2:**
+> What you are describing is federally illegal and likely illegal in your state (regardless of your age at the time). […] Report 401k theft in ALL OF THE FOLLOWING WAYS: To the U.S. Department of Labor's Employee Benefits Security Administration (EBSA) […] I've been involved with legal matters and law firms over the years in and outside of the ERISA 401K space and can not over emphasize how important it is to have clear notes in a folder as I've described. […] This is your money and it compounds, so it is far more than $9k and will be sizable as the years pass.
+
+### `bare_advice`
+
+**Definition:** Advice that says what to do without real backing — no reason at all, or only a common opinion.
+
+**Example 1:**
+> Do not pay on the house if it isn't in your name.
+
+**Example 2:**
+> If the so-called financial advisor tries to sell you an annuity, run away. The only person who makes money from an annuity is the shark selling it to you
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `reasoned_advice` vs. `bare_advice`
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The decision rule I used every time:** A comment is `reasoned_advice` only if it backs the advice with an actual justification — a fact, a number, a rule, or how something works. A "reason" that is just a common perception or an insult ("the advisor is a shark") is not proper backing, so the comment is `bare_advice`. The commenter's own personal situation ("my wife and I combined don't make that") is also not backing — it's their situation, not a fact — so it doesn't make a comment `reasoned_advice` either. Length doesn't decide it: a short comment can be reasoned, and a long one can be bare.
 
+### What I left out
+
+Replies that neither ask for help nor give advice — commenters doubting the poster's story ("Something isn't aligning"), side questions to the poster ("Don't 401K providers send statements?"), and the poster's own follow-up replies. They don't fit any of the three labels, so I didn't collect them, rather than force them into a label or add a fuzzy fourth one.
 
 
 ---
