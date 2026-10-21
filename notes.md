@@ -33,3 +33,11 @@ situation with another person the poster had mentioned.
 
 It gives a reason, but a thin one. Is that advice "with a reason" or not?
 This needs a decision rule in Milestone 2.
+
+## Stress test (Milestone 2)
+
+Claude wrote 8 posts on my label boundaries; I sorted them with my rule.
+7 of 8 were clean. "Never co-sign a loan. Ever." I couldn't decide, because my
+definition said "a rule" counts as backing. I tightened it: only real rules
+(laws, tax rules, policies) count — rules of thumb are common perception, so
+that post is `bare_advice`.

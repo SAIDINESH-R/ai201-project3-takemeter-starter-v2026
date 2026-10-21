@@ -4,5 +4,5 @@
 # definitions you wrote. baseline.py reads this file.
 
 question: a post where someone describes their own money situation and asks for help with it
-reasoned_advice: advice backed by an actual justification - a fact, a number, a rule, or an explanation of how something works
+reasoned_advice: advice backed by an actual justification - a fact, a number, a real rule (law, tax rule, policy), or an explanation of how something works
 bare_advice: advice that says what to do without real backing - no reason at all, or only a common opinion

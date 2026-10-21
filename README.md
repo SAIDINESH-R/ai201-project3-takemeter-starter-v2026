@@ -66,7 +66,7 @@
 
 ### `reasoned_advice`
 
-**Definition:** Advice backed by an actual justification — a fact, a number, a rule, or an explanation of how something works.
+**Definition:** Advice backed by an actual justification — a fact, a number, a real rule (a law, tax rule, or policy), or an explanation of how something works.
 
 **Example 1:**
 > Typically, ADP won't have anything to do with your 401k except processing the deduction. This is a question your old employer needs to answer. If it was a minimal balance, it's entirely possible they cashed you out and sent you a check. You can also check unclaimed funds. If a company is "advanced" enough to use ADP, it's highly unlikely they're pocketing your funds. Not saying it didn't happen, but there are other possibilites.
@@ -88,7 +88,7 @@
 
 **Which two labels:** `reasoned_advice` vs. `bare_advice`
 
-**The decision rule I used every time:** A comment is `reasoned_advice` only if it backs the advice with an actual justification — a fact, a number, a rule, or how something works. A "reason" that is just a common perception or an insult ("the advisor is a shark") is not proper backing, so the comment is `bare_advice`. The commenter's own personal situation ("my wife and I combined don't make that") is also not backing — it's their situation, not a fact — so it doesn't make a comment `reasoned_advice` either. Length doesn't decide it: a short comment can be reasoned, and a long one can be bare.
+**The decision rule I used every time:** A comment is `reasoned_advice` only if it backs the advice with an actual justification — a fact, a number, a rule, or how something works. A "reason" that is just a common perception or an insult ("the advisor is a shark") is not proper backing, so the comment is `bare_advice`. The commenter's own personal situation ("my wife and I combined don't make that") is also not backing — it's their situation, not a fact — so it doesn't make a comment `reasoned_advice` either. A rule of thumb ("never co-sign a loan") is popular wisdom, not a real rule, so it doesn't count either. Length doesn't decide it: a short comment can be reasoned, and a long one can be bare.
 
 ### What I left out
 
