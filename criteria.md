@@ -51,63 +51,47 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall accuracy is at least 0.70 on the held-out test set.
 
-<!-- Your criterion. It must name a number. -->
-
-
-
-**Why this target:**
-
-
+**Why this target:** With three labels, guessing gets about 0.33. I need the
+model to get 7 out of 10 posts right before I'd trust it to sort
+r/personalfinance comments without checking each one myself.
 
 ---
 
-## 2.
+## 2. The weaker of `reasoned_advice` and `bare_advice` has an F1 of at least 0.60.
 
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
-
-
+**Why this target:** This is my hardest boundary — the only difference is
+whether the advice is backed by a fact, number, or real rule, and short
+comments can go either way. I'm allowing it to be lower than the overall
+target, but it still has to be clearly better than a guess.
 
 ---
 
-## 3.
+## 3. `question` has an F1 of at least 0.85.
 
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
-
-
+**Why this target:** Question posts look very different from advice — they
+describe the poster's own situation and end in "what should I do?". If the
+model can't separate those from replies, it hasn't learned anything useful, so
+this label should be close to perfect.
 
 ---
 
-## 4.
+## 4. My smallest label is at least 25% of labels.csv.
 
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
-
-
+**Why this target:** Most r/personalfinance comments are advice, so `question`
+posts are likely to be my thinnest label. At 25% of 200 that's 50 posts, which
+puts about 8 in the test split — the point where a per-label F1 stops jumping
+around between seeds.
 
 ---
 
-## 5.
+## 5. The model's most-confident third of test predictions is at least 20 percentage points more accurate than its least-confident third.
 
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
-
-
+**Why this target:** If the model is sure about a comment, that should mean
+something — I'd want to trust its confident calls and only check the unsure
+ones by hand. With about 30 test posts, each third is only about 10 posts, so a
+small gap could be noise; 20 points is a gap I'd believe.
 
 ---
 
