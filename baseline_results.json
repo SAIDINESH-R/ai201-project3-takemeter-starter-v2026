@@ -1,0 +1,249 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 43,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 43,
+    "accuracy": 0.5581395348837209,
+    "f1_macro": 0.48878833584715936,
+    "per_label": {
+      "bare_advice": {
+        "precision": 0.5,
+        "recall": 0.06666666666666667,
+        "f1": 0.11764705882352941,
+        "support": 15
+      },
+      "question": {
+        "precision": 0.6111111111111112,
+        "recall": 0.9166666666666666,
+        "f1": 0.7333333333333334,
+        "support": 12
+      },
+      "reasoned_advice": {
+        "precision": 0.5217391304347826,
+        "recall": 0.75,
+        "f1": 0.6153846153846153,
+        "support": 16
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "Forever home purchase seeking others opinions on logistics \u2014 We signed a contract to purchase a house with closing in February 2027. The purchase price is $850,000 and we will be putting 5% down so loan will be $807,500. With interest rates climbing, we just want to make sure we aren\u2019t getting into a mess. We can still back out after we have an inspection done. Our household income will be $557,000 starting in December when my wife starts her job. We are both CRNAs so we no concerns with job security or income decreasing. My salary has gone up $100k in the 5 years I have been working as a CRNA. We have a 5 year old and a 1 month old, and possibly will try to have one more child. We have a little over $500k in retirement 401/457. 50k in a HYSA. $75k in a SoFi brokerage account. Currently our monthly spend is around 10k which includes renting a condo at $2,100/mo and $2,000/mo for daycare/nanny. That will increase to $3,000/mo when our newborn starts daycare when she turns 6 months or so. Our first child has $40k in a 529 and I just opened one for our second child and contributing $500/mo. Our gross monthly income will be $46,500. If we both max our 401k and 457, as well as our HSA, our net monthly income will be about $25,000. I\u2019m anticipating our monthly mortgage to be around $7,000, so about 28% of our net monthly income. There should be no reason to be concerned, correct?",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "First off, bills come first. If you can't pay rent, you have a bigger problem than your investment strategy. Assuming you're talking about after essential bills are paid, if you're paying interest on a credit card... pay it off. Nothing else you can possibly do with your money can beat the return you get by eliminating credit card debt. If you pay 18% interest, then paying down the debt is (more or less) a guaranteed 18% return on your \"investment\" The only reason to keep cash in the bank is to cover an emergency you can't charge in on the card or for situations where you might lose your access to credit(e.g. you lose your job and they cut your credit line). Once the emergency fund is set up? Pay off the cards.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Unless you have qualifying medical expenses to offset the withdrawal, then you will pay federal income tax + 20% penalty on the non-qualified withdrawal, assuming you are under age 65. State and local income taxes may also apply depending on your location.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "An acquaintance took a job in another state for almost 25k increase in pay. Got there and with the 25k+, it was the same cost of living back home w/o the extra pay.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "What prospect should I have my traditional IRA in? \u2014 It's currently in SPAXX only making 3.29%. Should I switch it and if so where to?",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "He doesn\u2019t believe he should subsidize you but wants you to subsidize him. It doesn\u2019t really sound like you two are really ready to move in together. I\u2019d try to get him to see to a 1 bedroom, split rent 50/50, and have his mom stay in a hotel or on the couch when she visits. Otherwise I\u2019d walk because he\u2019s taking advantage of you financially.",
+      "gold": "bare_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "This is a ridiculous idea. You are just shifting debt around, you are not truly getting out of the car this way. You will be paying a monthly payment on a $10k loan and a loan for another car. You want to take out a 13% interest personal loan to pay off a 9% car loan. You will likely not get a good rate on an older used car, plus you will have to factor in the maintenance costs associated with an older vehicle. I\u2019m trying to figure out how you ended up $22k in the hole for a 2025 vehicle. My guess is that you were upside down on a car before this one and you rolled it into the new loan. Cars depreciate, but not by $22k in 1-2 years.",
+      "gold": "reasoned_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "Job offer across the country \u2014 Hi everyone, I have a job offer north of Seattle making $49/hr with overtime pretty available, 5% 401k match as well as a HSA(I'm unfamiliar with these but think I can use it as another investment account?). I currently live in Michigan making $28/hr with as much overtime as I want with 4% 401k match, I'm at 8%. I don't pay rent currently. My fixed costs $380 car payment, $605 student loans. $180 insurance a month. I pay \\~$450 a month in utilities currently. Food and gas average about $350-$400 a month each. Internet is $130. I'm looking at some studio apartments in the new job area that range from $1400 to $1700. Utilities are unknown, penciling in about the same. Internet will be about $70 from what I've seen so far. I'd try to keep food and gas closely the same. How feasible are these studios for me? It's a big jump from not paying rent at all, I've ran the numbers a few times and it looks perfectly okay, just want more opinions! Thank you!",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "If you can cash flow it out in 15 months and can get approved for a line big enough, Chase Freedom Unlimited is 0% for 15 months",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "If he considers the second room for his mom and yet refuses to pay more than half, I'm sorry but I see it as using you. Let's say it's not someone i'd imagine living my life with.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Recently laid off, advice on debts with severance \u2014 Hello, I was recently laid off, was given a good severance. Looking for advice on paying down debts vs keeping $$ on hand (HYSA) etc. I am 37, I have 310k in retirement accounts. I was laid off a month ago, was given a severance (78k hit my account after reductions). I already had 27k in my bank account, i have 12k in an HYSA so I am sitting on about 120k ish. I have some loans outstanding, about 16k left. 4 unsubsidized, 2 subsidized. I do have a mortgage of 1900/mo With 120k on hand, is it smart to pay these debts down, knowing the job market, etc. I have been getting interviews but unsure if it's best to keep most of this on hand for tough times ahead (in case) or just pay down the debts. Thanks in advance",
+      "gold": "reasoned_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "Drive a paid off car into the ground or trade it while it still has value and get one not on its last leg/more trustworthy? \u2014 Since we had both cars paid off I\u2019ve been working hard at doing the \u201chard\u201d adult stuff with a very much middle class household income. Lose debts. Retirement. No balance on our cars. Have some in investment funds. Have almost a full 3 months saved in a high yield just for emergencies. Etc. I was going to finish that and those and then start a car replacement fund and increase the retirement contributions next. But\u2026 Wife\u2019s car went last year so we added a vehicle loan there. Everything else is gone but mortgage and about $3K of student loans. Was hoping to have student loans paid off by 2027. Car will be a few years. I drive a 10 year old Jeep Cherokee. 180K miles. I\u2019ve had it since new. Paid with an insurance settlement mostly off my last car. It\u2019s been paid off for more than several years. Had a few fixes lately. Nothing major except a full tuneup ran about $2K. $300 here. $500 there. Sensor. Injector. Coils. Spark plugs. Tires. Etc. Mechanic says it\u2019s driving good with a lot of new parts. I\u2019m just less confident in it. It\u2019s to a point where I don\u2019t like driving it over an hour or so from the house. I drive it to work and back. My question is, or the TLDR\u2026 Do you recommend keep driving it, drive it into the ground and scrap it and deal with it whenever it goes? Or see what I can trade it for now, take a bite out of an investment or savings somewhere else, and commit to maybe a short term (3 years or less) auto loan to get a quality used vehicle that I\u2019m more confident in, at the cost of not contributing as much to the retirement and debt reduction plan I have been doing so far? Thanks",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "Don\u2019t empty your savings just divert that 20% to paying down your car. Bet you could get it done in 6 months with double payments like you\u2019ve been doing plus that 20%. Then you can get back to saving. Don\u2019t empty your savings. Leave it alone.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "All you need is in the wiki. https://www.reddit.com/r/personalfinance/wiki/investing/",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I have a higher household income than your future state, one child, half the house cost and a third of the current rate and I still feel semi constrained and anxious about our savings rate. An 800k loan at 7% with taxes and insurance folded in is 7k a month, more than your entire budgeted bare minimum expenses. Add to that that homes need care and your bare minimum will go up because of that. Call it 1k a month conservatively. So now 8k + child care, groceries, car stuff, miscellaneous etc. now that 6k looks more like 12k at least. If we assume that you net about 65% of your income and your husbands salary is at the high end of the range, you have a 2500 dollar a month buffer. 65% is the high end, mine after 401k and insurance etc was closer to 55%. Split the difference at 60%. Now monthly income is 13.5k. So if you\u2019re lucky a 1.5k buffer on your bare minimum. Lotta words to say I wouldn\u2019t buy a million dollar house if I were you. Also the whole husband isn\u2019t a saver thing. If you\u2019re married, you have one money. If he\u2019s not a saver, you as a team isn\u2019t a saver. Unless you just mean that he doesn\u2019t think about this stuff and the mental burden falls on you.",
+      "gold": "bare_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "Assuming you\u2019re single, when you sell a home, $250k of the profit is tax free, if you lived in it as primary residence for 2 of last 5 years. Congrats.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I don't think you can deduct trad IRA contribution so Roth would be the only option, your financial advisor should have explained that unless my math is wrong.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I would like to offer that there may not be a bright line difference between \u201clifestyle inflation\u201d and \u201csensible family upgrade\u201d. I know people use \u201clifestyle inflation\u201d negative, but let me offer the alternative view that money is supposed to \u201cinflate\u201d our lives. Its purpose is not to be hoarded like we\u2019re Scrooge, the purpose of money is to be spent. The questions are really, when is the time to spend that money? And are we spending the money in a way that is consistent with our goals? So in practical terms for you and your spouse, I\u2019d say that you both sit down and figure out your plan for your money, including short, medium, and long term goals. See if a newer car can be accommodated in those plans. Then if it\u2019s economically feasible, figure out if it\u2019s what you actually want. At 25 years old, this internet stranger\u2019s opinion is to get something newer if it\u2019s well within budget since one spouse really wants it.",
+      "gold": "bare_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "Well good job getting back to current. The reality is you just need time for your score to recover. And realistically with a lower credit score you are going to have two or three options: put a side a significantly larger down payment, purchase a \"cheap\" home (like 1-2 times your combined annual income - where most people buy 3-5 times) and/or just wait. Also option to just finance everything in partner name if they have good credit (but that is SUPER RISKY if you break up.) Best bet is to wait for score to recover and possibly interest rates to drop, or looking buying a cheap home. Also look into the legal benefits of marriage. Purchasing a home unmarried can be risky if you are not on title.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Advice on maturing CD \u2014 I have \\~$9,600 in a CD that matures in 3 days. I don't think I want to put it back in a CD since rates aren't great right now. I also have \\~$13,700 invested currently an am not sure I want to lock up any more money right now. Only debt I have is student loans with the highest interest loan being 4.6%. What would you do? Should I invest more, pay off loans, or put into highest CD I can find? Are there any other avenues I should check out?",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "Young couple seeking advice \u2014 Hello, young couple looking for advice with investments and opinions on best ways to pay off debt. We currently have a mortgage that we\u2019re 3 years into out of 30 and the original loan amount was 333k and we\u2019re down to $322k on a FHA loan, my mortgage is $2808 a month. We have only one car now with $18k left on the loan. I have retired my wife at 24 so she can stay home and tend to our child. I recently left a job which paid me out and I have about $32k in my savings, $30k in a 457 account, and $35k in my pension. I have one student loan which has approximately $4k left on it. My wife and are looking to stay in our first home for maybe another 6 years and I want to set us up in the best way financially for a second home. I have recently read about mortgage recasts, would this be wise to put some of the cash I have on hand into the principal of my mortgage in order to lower my monthly payments? If not what are some high yield savings accounts that are recommended? TIA!",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "You shouldn't owe any taxes on that house. Invest that money and watch it grow into a nice nest egg.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "You need to provide a lot more context in order to get helpful information. * How much do you spend per month? * How much does your 75M husband get from SS? * What is your expected SS benefit at 67? * When do you plan to start drawing on SS? * How much are you netting from your business sale? * How much do you have in traditional retirement accounts? * How much do you have in Roth retirement accounts? * How much do you have in taxable accounts? I would focus less on the 30 odd days we have until the midterms, and more on the next several decades you hope to live.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Two HDHP plans for my son - which one is primary/secondary and does it matter? \u2014 For 2027, I (dad) will have a HDHP plan. His mom will likely have a HDHP plan as well, but it's possible she'll opt for a non-HDHP plan, so that's still TBA. We're trying to figure out how coverage works, and whether it makes sense for him to be on my HDHP plan. The main benefit to him being on my plan is I get an employer contribution to the HSA for dependent and it doubles my HSA contribution limit. One downside is it's a higher premium. The other downside may be from which insurance acts as primary. There seems to be a set of rules to follow to determine primary. There's a coordination of benefits process that seems dependent on a number of things. In our case, his mom and I are not together, and he's with me for the majority of the year so I believe mine will be primary. But even under the birthday rule, mine would still be primary as my birthday is earlier in the year. The problem is if we both get a HDHP. My deductible will be higher than his mom's, and once we meet the deductible, all medical services, excluding prescriptions are covered in full (yes, you read that right. i believe this is unusual as it sounds like what would happen if we meet the maximum OOP), so I don't think her insurance will ever be active... It seems only beneficial to have her insurance if she takes a non-HDHP plan. Now if she doesn't get a non HDHP plan, then I think it would be advantageous as the the amount that I pay towards my insurance's deductible will be processed by her insurance and may result in a lower amount. Is all of this understanding correct?",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "To give 10% or invest it, what\u2019s the consensus? \u2014 Now that I have a 6 month efund, I am able to do the whole Ramsey special, where I can invest 15% of my gross pay, save 10%, and give 10%. I make roughly 40k a year as a 29 year old, but my salary is likely to increase as I start my LLC as a licensed professional. So that equates to roughly $600 a month into my Roth, with about $3.2k so far. Problem is I\u2019ve just discovered CoastFIRE and would love to try and reach, or get close to my CoastFIRE number when I turn 40, so about 10 years and 5 months from now. I still want to keep saving for either financial goals or taxes. So now the question to give 10%, or not? I know this is a very idealogical and potentially spiritual question that\u2019s values based, I just want to hear what other people think when approaching this financially. If I don\u2019t give, I can invest $1k a month, but there are causes I believe in and would like to support. Would appreciate your thoughts!",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "You should be eligible for an ABLE account. It is not taxed if used for disability related expenses, which has a broad range. Housing is considered disability related. Also, at a certain amount, SSDI is taxed federally.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Rent trap? Urban legend or misinformation. Both are ways to buy housing. That's it. https://www.nytimes.com/interactive/2024/upshot/buy-rent-calculator.html",
+      "gold": "bare_advice",
+      "predicted": "bare_advice"
+    },
+    {
+      "text": "I would get rid of the rental and invest in index funds. Probably get rid of the house too, just invest till you have more. You have a negative networth by a long shot, not sure how you borrowed so much on that income.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I would see if the company your working with offers financing of some sort. Never have done pool stuff but most decently sized companies will work with you in some way. Otherwise a personal loan I guess. You're on the high end of what they normally allow for and rates don't tend to be great. Last option if you don't plan on leaving your work and don't expect to get fired is a 401k loan if you have one.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Money Market Funds viable alt to HYSA? \u2014 I currently have my emergency fund in my cap1 HYSA, but now that rates are increasing, I\u2019ve been thinking about moving 2/3 into my Schwab brokerage to buy SWVXX. Is this a good idea? I\u2019ve also considered SGOV and other Schwab MMF options but don\u2019t want a long lock up in a cd. Living in Ohio for the foreseeable future. Further, I saw something like inflation might not be as \u201chot\u201d as originally projected. Not sure if that means there\u2019s less chance of another rate hike or not.",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "On $5\u201310k, a 1 percentage point gap is about $50\u2013$100 a year before taxes. If switching is easy, that\u2019s a nice bonus; if it means chasing promo rates or adding hassle, keeping the account you trust seems reasonable.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I know this is not the question, but if $10k represents your entire savings you are not ready for a mortgage if that is your sole household savings. The downpayment will eat all that up, and you will still need money for closing costs, personal emergencies, or home repairs. Closing costs are typically 5-15k for homes within the price range of a first time homebuyer. And a single home repair can easily be several thousand dollars, with most homebuyers spending 1-5% of the home\u2019s value in repairs with the first year alone.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Bro (or sis?)... you're espousing some kooky, hide my cash under the mattress sentiments here. Government cant take your 401k in any normal reality. Time in the market beats timing the market. You're 27 years old even if the economy tanks it can and will likely recover. Just look at the market from 2008 financial crisis until now. And even if you are bearish about the US economy, you can still contribute to a 401k and put the money into international index funds as well so you're not that exposed to the US economy. I'd check out r/bogleheads 3 fund portfolio and think about diversification.",
+      "gold": "reasoned_advice",
+      "predicted": "bare_advice"
+    },
+    {
+      "text": "Chase is equally across the US and less BS. BOA sucks and I\u2019ll die on that hill.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I\u2019m same age as you and in the same boat as you, one thing I will tell you is I just had to spend 1300 dollars to repair my car, expect things like that to happen, keep a emergency fund. Also really understand your expenses, once you do that you really can control your money the way you want to",
+      "gold": "reasoned_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "Ally, Amex, Capital One, whatever. Any free HYSA is better than a 0% APY checking account. Don't let the choices paralyze you.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Is this an AI question? I've never heard either phrase and I'm not really sure what the issue is. You said you're both frugal and her spending is about safety, so that doesn't seem like the typical concern about lifestyle creep (spending money just to spend it). Maybe talk with her to learn more about her decision making, as her decision making sounds incredibly reasonable.",
+      "gold": "bare_advice",
+      "predicted": "question"
+    },
+    {
+      "text": "All savings in google stock \u2014 I have all my savings in Google stock. That's $10,000 at $335.66 stock. I had more but I went on margin and then I sold it because I didn't like to play with debt. The 2 days later it rose to $400 profit on my personal $10k. Should I leave that money in there and continue to add more later or should I sell it when it's $400, $500 profit? I plan to get a mortgage in around a year or two.",
+      "gold": "question",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "Moving part of an emergency fund to the stock market while pursuing FIRE? (Scared of volatility) \u2014 Hey everyone, My partner 30M and I 29F are pursuing FIRE on a $400k combined income, and we're currently in the home stretch of paying off our primary mortgage. Our net worth is around $830k, which includes a fully paid-off rental property generating passive income. (The primary house is 435k and 270k left with 5.75% rate, I only included the paid off part in our NW) We bring home about $21,000 a month after tax and maxing out our 401ks, and we consistently save 70% to 85% of that. Paying off the house within the next year to year-and-a-half is an absolute non-negotiable priority for our timeline. Once it's paid off, my plan is to start putting my money into the stock market. Since I'm new to market investing outside of retirement accounts, I want to get my feet wet now. I currently have a $30,000 emergency fund sitting in an HYSA making a guaranteed 3.5%. I'm toying with the idea of taking $20,000 out of that and moving it into the stock market to practice. I am genuinely terrified of waking up one day and seeing my money cut in half. Is raiding my emergency fund to test the waters too reckless for someone with my low risk tolerance? Or should I just wait until the house is paid off and start investing fresh savings then? What breakdown/funds do you recommend that I at least get 3.5%??",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "Am I too broke to buy engagement ring? \u2014 26yo, $100k salary, $10k in savings, $35k in retirement, and $10k bonus on the way in January. Would it be foolish to spend $10k on an engagement ring?",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "Secured credit card. You deposit cash. The cash acts as your collateral. The credit limit is the amount of cash you deposited. Find one without fees. Capital One has one. Don't carry a balance. After 6-12 months, you may be eligible to upgrade to an unsecured card. Keep not carrying a balance.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "I am a simple man. I have utilized Bank of America for multiple mortgages \u00e2nd car-loans, I have been pleased with their very professional and Customer friendly approach.",
+      "gold": "bare_advice",
+      "predicted": "reasoned_advice"
+    },
+    {
+      "text": "You're selling investments to pay for your life, that means you have income higher than subsidy thresholds. Best way to get those subsidies again is to stop selling assets for income. There's no magic bullet here. If you live on only your wages, you can apply for the subsidies. If you live on more than your wages with investments, you lose those subsidies. If you sell your investments all at once, you'll pay a lot more in taxes than you need to and you'd still be collecting income from interest so your income would still be higher than wages. Whether that keeps you below these subsidy thresholds is matter of calculation. But if you currently have to sell assets to meet your income/expense needs, you'll need just as much interest from savings accounts to meet those needs unless you change your spending habits.",
+      "gold": "reasoned_advice",
+      "predicted": "reasoned_advice"
+    }
+  ]
+}
