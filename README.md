@@ -210,7 +210,7 @@ Every label has at least 12 in the test split, above the ~8 where per-label scor
 | F1 — `label_one` |  |  |  |
 | F1 — `label_two` |  |  |  |
 
-**What I predicted before I looked:**
+**What I predicted before I looked:** I predict the baseline wins or ties: a big general model might understand "backed by a fact" better than a small model trained on ~200 rows.
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
 
