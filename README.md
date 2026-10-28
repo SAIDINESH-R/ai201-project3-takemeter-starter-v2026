@@ -191,6 +191,8 @@ Every label has at least 12 in the test split, above the ~8 where per-label scor
 
 **Pre-labelling disclosure:** 262 of 282 rows were pre-labelled by Claude. I reviewed 32 of them (all from the flagged-hard set) and agreed with every one. **The other 230 were not reviewed by me** — I stopped the review partway through and accepted the remaining pre-labels as they were. Every row's `note` column says which group it is in (`cold`, `checked by me`, or `not reviewed`). Only the 20 cold rows are labels I made independently. If the model struggles on the `reasoned_advice`/`bare_advice` boundary next unit, the unreviewed rows are one of the first places to look.
 
+**Unit 6 AI use:** Claude ran the baseline, the three-seed runs before and after, and the confusion matrices, and drafted the unit 6 write-up from those results. It spotted the training-loss evidence for under-training that I chose as my improvement. It also labelled sp_013–sp_030 of the staff set at my request (I did sp_001–sp_012). My baseline prediction was written and committed before the baseline ran.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -200,178 +202,128 @@ Every label has at least 12 in the test split, above the ~8 where per-label scor
 
 ## Baseline vs. Trained
 
-<!-- Both models on the same posts. `python baseline.py --trained results.json`
-     prints this table for you. -->
+Both scored on the same 43 held-out posts (`test_split.csv`, seed 42). Baseline: `facebook/bart-large-mnli` zero-shot, given only the three definitions in `label_definitions.txt`. Trained: the unit 5 model (3 epochs).
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.558 | 0.698 | +0.140 |
+| Macro F1 | 0.489 | 0.705 | +0.216 |
+| F1 — `question` | 0.733 | 0.762 | +0.029 |
+| F1 — `reasoned_advice` | 0.615 | 0.727 | +0.112 |
+| F1 — `bare_advice` | 0.118 | 0.625 | +0.507 |
 
 **What I predicted before I looked:** I predict the baseline wins or ties: a big general model might understand "backed by a fact" better than a small model trained on ~200 rows.
-<!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
-     prediction made afterwards isn't one. -->
 
-**What the gap actually means:**
-<!-- If the baseline matched your trained model, your fine-tuning added
-     nothing — and that is a real finding, not a failure. Say it plainly. -->
-
-
+**What the gap actually means:** My prediction was wrong. The trained model beat the baseline by 14 points of accuracy, and almost all of the gap is one label: `bare_advice` (0.118 → 0.625). The baseline handles `question` nearly as well as the trained model — asking for help looks like asking for help to any language model. But it almost never says `bare_advice`, because "without real backing" only means something under my rules (personal experience and rules of thumb don't count), and a one-line definition can't carry those rules. Fine-tuning is what taught the model where *my* line is.
 
 ---
 
 ## Run Log — Before
 
-<!-- Five criteria across three seeds. The notebook's section 6 prints the
-     spread table; the Target and Verdict columns are yours. -->
+Device: `mps` (Apple Silicon), torch 2.14.1. Defaults: 3 epochs, lr 2e-5, batch 16, max length 128.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.70 | 0.698 | 0.791 | 0.651 | MISSED |
+| 2. Weaker of `reasoned_advice` / `bare_advice` F1 | ≥ 0.60 | 0.625 | 0.667 | 0.000 | MISSED |
+| 3. `question` F1 | ≥ 0.85 | 0.762 | 0.957 | 0.923 | MISSED |
+| 4. Smallest label share of labels.csv | ≥ 25% | 27.3% | 27.3% | 27.3% | MET |
+| 5. Most-sure third minus least-sure third accuracy | ≥ 0.20 | 0.286 | 0.000 | 0.500 | MISSED |
+
+Accuracy spread across seeds: **0.140** — more than 10 points, so a single run of this model isn't a stable measurement.
 
 ### Confusion matrix
 
-<!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
-     An image of a matrix earns nothing. -->
+Seed 42:
 
-| true \ predicted |  |  |  |
+| true \ predicted | question | reasoned_advice | bare_advice |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **question** | 8 | 0 | 4 |
+| **reasoned_advice** | 1 | 12 | 3 |
+| **bare_advice** | 0 | 5 | 10 |
 
-**My biggest off-diagonal number, and what it means:**
-<!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
-     direction. "7 real analysis posts were called hot_take and only 3 went the
-     other way" is a direction, not just an error rate. -->
+Seed 2024, for comparison (the collapse):
 
+| true \ predicted | question | reasoned_advice | bare_advice |
+|---|---|---|---|
+| **question** | 12 | 0 | 0 |
+| **reasoned_advice** | 0 | 16 | 0 |
+| **bare_advice** | 2 | 13 | 0 |
 
+**My biggest off-diagonal number, and what it means:** In seed 42, 5 real `bare_advice` posts were called `reasoned_advice` and only 3 went the other way; across all three seeds that direction totals 25 (5 + 7 + 13) against 4 the other way. The model leans hard toward calling unbacked advice "reasoned" — and in seed 2024 it never predicted `bare_advice` at all.
 
 ---
 
 ## Verdicts and Diagnoses
 
-<!-- MET or MISSED against LAST UNIT's target. The target has to hold across
-     all three seeds, not turn up sometimes. -->
+Verdicts are for the **before** run, against the unit 5 targets. A target has to hold on all three seeds.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.70 | MISSED | Seeds 42 (0.698) and 2024 (0.651) are under 0.70. |
+| 2 | Weaker of reasoned/bare F1 | ≥ 0.60 | MISSED | `bare_advice` was 0.000 on seed 2024. |
+| 3 | `question` F1 | ≥ 0.85 | MISSED | Seed 42 was 0.762. |
+| 4 | Smallest label ≥ 25% | ≥ 25% | MET | `question` is 77 / 282 = 27.3%. It's a property of the file, so the same on every seed. |
+| 5 | Confidence gap | ≥ 0.20 | MISSED | Seed 7 had no gap at all (0.786 vs 0.786). |
 
 **Diagnoses**
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
-
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
-
-
+- **Criteria 1, 2 and 5: the model was under-trained.** Training loss ended at 0.93–0.99 on all three seeds. A model that guesses evenly among three labels scores about 1.10, so it had barely moved off guessing. That explains why the seed-2024 model never predicted `bare_advice` (it fell back to the two easier labels), why accuracy swung 14 points between seeds, and why its confidence meant nothing on seed 7. The evidence that this was training and not data: with no change to the data, 8 epochs fixed all three (see The Improvement).
+- **Criterion 2: also a genuinely hard pair, possibly labelled inconsistently.** Nearly every error is between `reasoned_advice` and `bare_advice`, which is the boundary I knew was hardest in unit 5. I have two pieces of evidence that the labels themselves are part of the problem. In my 20 cold labels, I broke my own personal-experience rule at least once (hard case 1, labelled `reasoned_advice`), and the boundary rule changed during unit 5 after the stress test. And 230 of the 282 rows are pre-labels I never reviewed. The agreement check below would show whether I apply a written rule consistently, but staff labels aren't available yet, so this part of the diagnosis is still open.
+- **Criterion 3: too few test examples for `question`.** Seed 42 had 12 `question` posts in test, and 4 of them were called `bare_advice`. At n = 12, each post is about 8 points of F1, so one draw can sink a strict 0.85 target that the other two seeds cleared (0.957, 0.923).
 
 ---
 
 ## Agreement Report
 
-<!-- Your rate against the staff set, and every disagreement adjudicated.
+**Status: incomplete.** `agreement.py` needs `data/staff_labels.csv`, which comes from the TF and hasn't been received. `my_staff_labels.csv` is committed so the comparison can run as soon as it arrives.
 
-     Remember you labelled these 30 under the STAFF taxonomy in
-     data/staff_taxonomy.md, not your own — so every argument below is made
-     from those definitions and those decision rules. -->
+**Who labelled `my_staff_labels.csv`:** I labelled sp_001–sp_012 myself under the staff taxonomy. **sp_013–sp_030 were labelled by Claude**, after I asked it to finish the set, so only the first 12 are evidence about how I apply a written rule.
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** ___ / 30 = ___% (pending staff labels)
 
-<!-- Nobody grades this number. A 60% who argues every disagreement from the
-     stated rules beats a 95% who wrote "staff was right" nine times. Several
-     of the 30 were chosen because they're genuinely ambiguous — you should be
-     winning some of these. -->
+**Disagreements:** pending staff labels.
 
-**Disagreements**
-
-<!-- Three lines each: the post, both labels, and who you think is right and
-     why — grounded in the staff definitions you were both applying.
-
-     Then sort each into one of three piles:
-       (a) the rule covered it and I applied it loosely → a consistency problem
-       (b) the rule genuinely doesn't say               → a gap in the definitions
-       (c) the rule is ambiguous here and my reading is defensible → argue it.
-           This is a legitimate win.
-
-     Pile (a) is the one that matters most for your diagnosis: if you applied a
-     written rule two different ways on 30 posts, that is direct evidence about
-     what you did across your own 200. -->
-
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**What the pattern in my disagreements tells me:**
-
-
+**What the pattern in my disagreements tells me:** pending.
 
 ---
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** `EPOCHS` from 3 to 8. Nothing else: same labels, same seeds, same learning rate, batch size and max length.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** Under-training. Training loss was stuck at 0.93–0.99 (chance is about 1.10), and on seed 2024 the model never predicted `bare_advice`. After the change, training loss is about 0.64.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.70 | 0.791 | 0.767 | 0.767 | MET |
+| 2. Weaker of `reasoned_advice` / `bare_advice` F1 | ≥ 0.60 | 0.750 | 0.690 | 0.667 | MET |
+| 3. `question` F1 | ≥ 0.85 | 0.815 | 0.917 | 0.917 | MISSED |
+| 4. Smallest label share of labels.csv | ≥ 25% | 27.3% | 27.3% | 27.3% | MET |
+| 5. Most-sure third minus least-sure third accuracy | ≥ 0.20 | 0.286 | 0.429 | 0.358 | MET |
 
-**Did it help, and how do I know:**
+Accuracy spread across seeds: **0.023** (was 0.140).
 
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+Seed 42 confusion matrix after:
 
+| true \ predicted | question | reasoned_advice | bare_advice |
+|---|---|---|---|
+| **question** | 11 | 0 | 1 |
+| **reasoned_advice** | 1 | 11 | 4 |
+| **bare_advice** | 3 | 0 | 12 |
 
+**Did it help, and how do I know:** Yes. Two criteria moved from MISSED to MET (1 and 5), criterion 2 recovered from 0.000 on its worst seed to 0.667, and the accuracy spread dropped from 14 points to 2.3, so these numbers are now stable enough to trust. The direction of the main error flipped, though. Before, the model called `bare_advice` "reasoned" 25 times and the reverse 4 times. After, it calls `reasoned_advice` "bare" 14 times (4 + 6 + 4) and the reverse 6 times (0 + 2 + 4). The pair is still hard; the model is now just erring the other way.
 
 ---
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+- **Criterion 3 (`question` F1 ≥ 0.85)** still misses on seed 42 (0.815). That seed has 12 test questions, and 1 was called `bare_advice`; the other two seeds clear the target easily. What I'd do: add more question posts so the test split holds more of them, which makes the per-label score less jumpy. Why I stopped: the brief allows one improvement per unit, and I used it on under-training.
+- **The `reasoned_advice` / `bare_advice` boundary** is still where most errors are. What I'd do: review the 230 unreviewed pre-labels against the written rule, starting with comments that cite personal experience or a rule of thumb. Why I stopped: same one-change rule, and the agreement report I'd use to justify it isn't back yet.
 
-
-
-**The gap between what I meant my labels to capture and what the model
-learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
-
+**The gap between what I meant my labels to capture and what the model learned:** I meant `reasoned_advice` vs `bare_advice` to be about whether a reason actually *backs* the advice, but after training the model still trades errors across that pair in both directions, so it hasn't fully learned the line. My guess is it partly learned surface cues like length, numbers and "because" rather than whether the backing is a real fact, which would explain why short reasoned comments now get called bare.
 
 
 <!-- ═════════════════════════════════════════════════════════════════════
